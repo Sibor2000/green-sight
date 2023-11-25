@@ -2,19 +2,21 @@ import streamlit as st
 from streamlit_keplergl import keplergl_static
 from keplergl import KeplerGl
 import pandas as pd
+import geopandas as gpd
 
 # Data setup
-df = pd.DataFrame(
-    {
-        "City": ["San Francisco", "San Jose", "Palo Alto"],
-        "Latitude": [37.77, 37.33, 37.44],
-        "Longitude": [-122.43, -121.89, -122.14],
-    }
-)
+# df = pd.DataFrame(
+#     {
+#         "City": ["San Francisco", "San Jose", "Palo Alto"],
+#         "Latitude": [37.77, 37.33, 37.44],
+#         "Longitude": [-122.43, -121.89, -122.14],
+#     }
+# )
+df = gpd.read_file("datasets/districts-berlin.geojson")
 
 map = KeplerGl(height=800)
 map.add_data(
-    data=df, name="GreenSight"
+    data=df, name="Districts"
 )
 
 # App setup
