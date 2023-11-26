@@ -1,8 +1,8 @@
-import json
+# import json
 import streamlit as st
-from streamlit_keplergl import keplergl_static
-from keplergl import KeplerGl
-import geopandas as gpd
+# from streamlit_keplergl import keplergl_static
+# from keplergl import KeplerGl
+# import geopandas as gpd
 import streamlit.components.v1 as components
 
 # Data setup
