@@ -126,7 +126,7 @@
                     "id": "cpk900w",
                     "type": "geojson",
                     "config": {
-                        "dataId": "grn81wsrc",
+                        "dataId": "Education",
                         "label": "education-coords",
                         "color": [
                             137,
@@ -241,7 +241,7 @@
                     }
                 },
                 {
-                    "id": "f9bux3",
+                    "id": "EV Charging",
                     "type": "geojson",
                     "config": {
                         "dataId": "1t3x2f91o",
@@ -477,7 +477,7 @@
                     }
                 },
                 {
-                    "id": "7a2d55k",
+                    "id": "Hospitals",
                     "type": "geojson",
                     "config": {
                         "dataId": "klbv62fco",
@@ -863,7 +863,7 @@
                                 "format": null
                             }
                         ],
-                        "grn81wsrc": [
+                        "Education": [
                             {
                                 "name": "@id",
                                 "format": null
