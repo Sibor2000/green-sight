@@ -1,101 +1,47 @@
+import json
 import streamlit as st
 from streamlit_keplergl import keplergl_static
 from keplergl import KeplerGl
 import geopandas as gpd
 
+gpd.options.io_engine = "pyogrio"
+
 # Data setup
-noise = gpd.read_file("datasets/noise-algo.geojson")
+# noise = gpd.read_file("datasets/noise-algo.geojson")
 # transport = gpd.read_file("datasets/transport-berlin.geojson")
-hospitals = gpd.read_file("datasets/hospitals-berlin.geojson")
+print("Loading districts")
+districts = gpd.read_file("datasets/districts-berlin.geojson")
+# print("Loading bikes")
+# bikes = gpd.read_file("datasets/bikes-coords.geojson")
+print("Loading education")
+education = gpd.read_file("datasets/education-coords.geojson")
+print("Loading EV charging")
+ev_charging = gpd.read_file("datasets/ev_charging-coords.geojson")
+print("Loading fast food")
+fast_food = gpd.read_file("datasets/fast_food-coords.geojson")
+print("Loading hospitals")
+hospitals = gpd.read_file("datasets/hospitals-coords.geojson")
+print("Loading stations")
+stations = gpd.read_file("datasets/stations-coords.geojson")
+print("Loading waste management")
+waste_management = gpd.read_file("datasets/waste_management-coords.geojson")
 
 
 map = KeplerGl(height=800)
-map.add_data(data=noise, name="Noise")
-# map.add_data(data=transport, name="Transport")
+
+# Add noise data, our custom well-being metric (took 2 hours to compute)
+# map.add_data(data=noise, name="Noise")
+map.add_data(data=districts, name="Districts")
+# map.add_data(data=bikes, name="Bikes")
+# map.add_data(data=education, name="Education")
+# map.add_data(data=ev_charging, name="EV Charging")
+# map.add_data(data=fast_food, name="Fast Food")
 map.add_data(data=hospitals, name="Hospitals")
+# map.add_data(data=stations, name="Stations")
+# map.add_data(data=waste_management, name="Waste Management")
 
 # Layer styles
-# map.config = {
-#     "version": "v1",
-#     "config": {
-#         "mapState": {
-#             "latitude": 52.520008,
-#             "longitude": 13.404954,
-#             "zoom": 10,
-#         },
-#         "visState": {
-#             "layers": [
-#                 {
-#                     "id": "y2q3v8",
-#                     "type": "geojson",
-#                     "config": {
-#                         "dataId": "Districts",
-#                         "label": "Districts",
-#                         "color": [18, 147, 154],
-#                         "columns": {"geojson": "geometry"},
-#                         "isVisible": True,
-#                         "visConfig": {
-#                             "opacity": 0.8,
-#                             "strokeOpacity": 0.8,
-#                             "thickness": 0.5,
-#                             "strokeColor": [10, 10, 10],
-#                             "colorRange": {
-#                                 "name": "ColorBrewer YlGn-6",
-#                                 "type": "sequential",
-#                                 "category": "ColorBrewer",
-#                                 "colors": [
-#                                     "#ffffcc",
-#                                     "#d9f0a3",
-#                                     "#addd8e",
-#                                     "#78c679",
-#                                     "#31a354",
-#                                     "#006837",
-#                                 ],
-#                             },
-#                             "strokeColorRange": {
-#                                 "name": "ColorBrewer YlGn-6",
-#                                 "type": "sequential",
-#                                 "category": "ColorBrewer",
-#                                 "colors": [
-#                                     "#ffffcc",
-#                                     "#d9f0a3",
-#                                     "#addd8e",
-#                                     "#78c679",
-#                                     "#31a354",
-#                                     "#006837",
-#                                 ],
-#                             },
-#                             "radius": 10,
-#                             "sizeRange": [0, 10],
-#                             "radiusRange": [0, 50],
-#                             "heightRange": [0, 500],
-#                             "elevationScale": 5,
-#                             "stroked": True,
-#                             "filled": True,
-#                             "enable3d": False,
-#                             "wireframe": False,
-#                         },
-#                         "hidden": False,
-#                         "textLabel": [{"field": None, "color": [255, 255, 255]}],
-#                     },
-#                 }
-#             ],
-#             "interactionConfig": {
-#                 "tooltip": {
-#                     "fieldsToShow": {
-#                         "Districts": ["name", "bezirk", "area", "population"]
-#                     },
-#                     "enabled": True,
-#                 },
-#                 "brush": {"size": 0.5, "enabled": False},
-#                 "geocoder": {"enabled": False},
-#                 "coordinate": {"enabled": False},
-#             },
-#             "layerBlending": "normal",
-#             "splitMaps": [],
-#         },
-#     },
-# }
+# map.config = json.loads(open("config.json").read())
 
 # App setup
 st.set_page_config(layout="wide")
